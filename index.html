@@ -39,14 +39,14 @@
   #prompt kbd{background:#7fa06a;color:#23261f;padding:2px 6px;border-radius:3px;font-weight:700;
     font-family:inherit;font-size:9px;}
 
-  #toast{position:absolute;left:50%;top:16%;transform:translateX(-50%) translateY(-8px);
-    background:rgba(24,27,23,.94);border:1px solid #5f7a4e;border-radius:10px;
-    padding:12px 18px;text-align:center;pointer-events:none;
+  #toast{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.96);
+    background:rgba(24,27,23,.96);border:1px solid #5f7a4e;border-radius:12px;
+    padding:20px 26px;text-align:center;pointer-events:none;
     opacity:0;transition:opacity .5s ease,transform .5s ease;z-index:6;
-    box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:82%;}
-  #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-  #toast .t-line{display:block;font-size:12px;color:#f2f4ef;letter-spacing:.04em;line-height:1.5;}
-  #toast .t-from{display:block;margin-top:6px;font-size:9px;color:#a8c98d;letter-spacing:.16em;}
+    box-shadow:0 14px 44px rgba(0,0,0,.65);max-width:86%;}
+  #toast.show{opacity:1;transform:translate(-50%,-50%) scale(1);}
+  #toast .t-line{display:block;font-size:14px;color:#f2f4ef;letter-spacing:.04em;line-height:1.6;}
+  #toast .t-from{display:block;margin-top:10px;font-size:9px;color:#a8c98d;letter-spacing:.16em;}
 
   #tip{position:absolute;background:rgba(18,20,15,.96);border:1px solid #4a4f42;color:#efece1;
     padding:5px 10px;border-radius:5px;font-size:10px;letter-spacing:.06em;white-space:nowrap;
@@ -92,7 +92,7 @@
     <div id="prompt"></div>
     <div id="toast">
       <span class="t-line">I'll follow you wherever you go.</span>
-      <span class="t-from">&mdash; My bb</span>
+      <span class="t-from">&mdash; Your bb</span>
     </div>
   </div>
   <div id="pad">
@@ -114,14 +114,14 @@
   <div class="eyebrow">The bed &middot; last stop</div>
   <div class="hearts">&hearts; &hearts; &hearts;</div>
   <div class="line" style="margin-top:18px">And for being the best boyfriend I could ask for.</div>
-  <div class="line">I'm sorry. I appreciate every single thing you do, and I'll keep doing better &mdash; for you, and for us.</div>
-  <div class="line">We got this. You're worth every mile.</div>
+  <div class="line">I'm sorry. I appreciate every single thing you do, and I'll keep doing better, for you and for us.</div>
+  <div class="line">You're worth every mile. We got this.</div>
   <div class="sig">&mdash; your bb &hearts;</div>
 </div></div>
 
 <div id="title">
   <h1>For My Sharkie</h1>
-  <p>a little apartment i made for you<br>arrow keys or the d-pad &middot; find all eight things</p>
+  <p>i built you a small place to wander<br>so you can see what you mean to me<br>arrow keys or the d-pad &middot; find all eight things</p>
   <button id="start">ENTER</button>
 </div>
 
