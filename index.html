@@ -73,11 +73,12 @@
   .hearts{text-align:center;font-size:13px;color:#5f7a4e;letter-spacing:.3em;}
 
   #title{position:fixed;inset:0;background:#12140f;z-index:20;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;transition:opacity .5s;}
+    align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px;transition:opacity .5s;}
   #title h1{font-size:26px;letter-spacing:.06em;color:#7fa06a;font-weight:600;}
-  #title p{font-size:12px;color:#9a9b8e;line-height:2;letter-spacing:.08em;}
-  #start{margin-top:8px;background:#5f7a4e;border:none;color:#fff;padding:14px 32px;border-radius:8px;
-    font-family:inherit;font-size:11px;letter-spacing:.18em;cursor:pointer;font-weight:700;}
+  #title p{font-size:13px;color:#c4bda9;letter-spacing:.16em;}
+  #tc{image-rendering:pixelated;width:184px;height:92px;margin:2px 0;}
+  #start{margin-top:2px;background:#5f7a4e;border:none;color:#fff;padding:14px 30px;border-radius:8px;
+    font-family:inherit;font-size:10px;letter-spacing:.13em;cursor:pointer;font-weight:700;}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
   @media(min-width:760px) and (min-height:640px){#pad{display:none;}#wrap{max-width:660px;}}
 </style>
@@ -121,8 +122,9 @@
 
 <div id="title">
   <h1>For My Sharkie</h1>
-  <p>i built you a small place to wander<br>so you can see what you mean to me<br>arrow keys or the d-pad &middot; find all eight things</p>
-  <button id="start">ENTER</button>
+  <p>Our little world</p>
+  <canvas id="tc" width="120" height="60"></canvas>
+  <button id="start">ENTER &middot; find all 8 things</button>
 </div>
 
 <script>
@@ -421,28 +423,30 @@ function drawObj(o){
 var HIM={skin:'#c99a72',hair:'#141610',curly:true,top:'#5f7a4e',stripe:'#ffffff',legs:'#1a1c16',shoe:'#2b2e26'};
 var HER={skin:'#d9a87e',hair:'#1d1f18',curly:false,top:'#c4bda9',midriff:true,legs:'#3a3e33',shoe:'#8f8a78'};
 
-function person(o,cfg,walking){
+function person(o,cfg,walking,g){
+  var d=g||x;
+  var qq=function(a,b,w,h,col){ d.fillStyle=col; d.fillRect(a,b,w,h); };
   var X=o.x*S, Y=o.y*S;
   var bob = walking ? Math.sin(o.f/4)*1.2 : Math.sin(Date.now()/700)*0.6;
   var Yb = Y+bob;
-  x.fillStyle='rgba(15,18,12,.28)'; x.beginPath(); x.ellipse(X,Y+9,7,3,0,0,7); x.fill();
-  pp(X-5,Yb+1,4,7,cfg.legs); pp(X+1,Yb+1,4,7,cfg.legs);
-  pp(X-5,Yb+7,4,2,cfg.shoe); pp(X+1,Yb+7,4,2,cfg.shoe);
-  pp(X-6,Yb-7,12,9,cfg.top);
-  if(cfg.stripe){ pp(X-6,Yb-4,12,2,cfg.stripe); pp(X-1,Yb-7,2,9,cfg.stripe); }
-  if(cfg.midriff) pp(X-5,Yb,10,3,cfg.skin);
-  pp(X-8,Yb-6,2,7,cfg.skin); pp(X+6,Yb-6,2,7,cfg.skin);
-  pp(X-5,Yb-15,10,9,cfg.skin);
+  d.fillStyle='rgba(15,18,12,.28)'; d.beginPath(); d.ellipse(X,Y+9,7,3,0,0,7); d.fill();
+  qq(X-5,Yb+1,4,7,cfg.legs); qq(X+1,Yb+1,4,7,cfg.legs);
+  qq(X-5,Yb+7,4,2,cfg.shoe); qq(X+1,Yb+7,4,2,cfg.shoe);
+  qq(X-6,Yb-7,12,9,cfg.top);
+  if(cfg.stripe){ qq(X-6,Yb-4,12,2,cfg.stripe); qq(X-1,Yb-7,2,9,cfg.stripe); }
+  if(cfg.midriff) qq(X-5,Yb,10,3,cfg.skin);
+  qq(X-8,Yb-6,2,7,cfg.skin); qq(X+6,Yb-6,2,7,cfg.skin);
+  qq(X-5,Yb-15,10,9,cfg.skin);
   if(cfg.curly){
-    x.fillStyle=cfg.hair;
+    d.fillStyle=cfg.hair;
     var cl=[[-4,-15,3.4],[0,-17,3.6],[4,-15,3.4],[-5,-12,2.8],[5,-12,2.8],[-1,-14,3.2]];
-    for(var i=0;i<cl.length;i++){ x.beginPath(); x.arc(X+cl[i][0],Yb+cl[i][1],cl[i][2],0,7); x.fill(); }
+    for(var i=0;i<cl.length;i++){ d.beginPath(); d.arc(X+cl[i][0],Yb+cl[i][1],cl[i][2],0,7); d.fill(); }
   } else {
-    pp(X-6,Yb-16,12,5,cfg.hair); pp(X-6,Yb-16,3,11,cfg.hair); pp(X+3,Yb-16,3,11,cfg.hair);
+    qq(X-6,Yb-16,12,5,cfg.hair); qq(X-6,Yb-16,3,11,cfg.hair); qq(X+3,Yb-16,3,11,cfg.hair);
   }
   if(o.d!==0){
     var dx = o.d===2?-2 : o.d===3?2 : 0;
-    pp(X-3+dx,Yb-11,2,2,'#23261f'); pp(X+1+dx,Yb-11,2,2,'#23261f');
+    qq(X-3+dx,Yb-11,2,2,'#23261f'); qq(X+1+dx,Yb-11,2,2,'#23261f');
   }
 }
 
@@ -651,6 +655,44 @@ document.getElementById('start').addEventListener('click', function(){
   setTimeout(function(){ toast.classList.add('show'); }, 620);
   setTimeout(function(){ toast.classList.remove('show'); }, 5620);
 });
+
+/* ---------- TITLE SCREEN: the two of them, holding hands ---------- */
+(function(){
+  var tc=document.getElementById('tc');
+  if(!tc) return;
+  var t=tc.getContext('2d');
+  var him={x:47/S,y:44/S,d:1,f:0}, her={x:73/S,y:44/S,d:1,f:0};
+
+  function titleFrame(){
+    if(!document.getElementById('title')) return;   // stop once dismissed
+    t.clearRect(0,0,tc.width,tc.height);
+
+    var g=t.createRadialGradient(60,46,0,60,46,36);
+    g.addColorStop(0,'rgba(95,122,78,.20)');
+    g.addColorStop(1,'rgba(95,122,78,0)');
+    t.fillStyle=g; t.fillRect(20,26,80,32);
+
+    person(him,HIM,false,t);
+    person(her,HER,false,t);
+
+    // joined hands — his right arm out, her left arm out, hands meeting
+    var bh=Math.sin(Date.now()/700)*0.6;
+    t.fillStyle=HIM.skin; t.fillRect(53,44+bh-6,7,2);
+    t.fillStyle=HER.skin; t.fillRect(60,44+bh-6,7,2);
+    t.fillStyle='#e0b087'; t.fillRect(58,44+bh-6.5,4,3);
+
+    var hb=Math.sin(Date.now()/560)*1.6;
+    t.save();
+    t.textAlign='center'; t.textBaseline='middle';
+    t.shadowColor='rgba(168,201,141,.9)'; t.shadowBlur=7;
+    t.fillStyle='#a8c98d'; t.font='9px monospace';
+    t.fillText('\u2665',60,24+hb);
+    t.restore();
+
+    requestAnimationFrame(titleFrame);
+  }
+  titleFrame();
+})();
 
 rescue();
 fit();
